@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <body>
+
+        <h3>
+            Ordenador de números
+        </h3>
+
+        <h4>
+            Algoritmo que ordena os números digitados pelo usuário 
+        </h4>
+
+        <div ng-app="minhaApp" ng-controller="meuCtrl">
+            <select ng-model="n">
+                <option value='1'>1</option>
+                <option value='2'>2</option>
+                <option value='3'>3</option>
+            </select>
+            <form class="form-inline" name="formItem">
+                <input type="number" ng-model="valor">
+                <button ng-click="adicionar()">Adicionar número</button>
+            </form>
+        </div>
+
+        <div ng-controller="meuCtrl">
+            <table>
+              <thead>
+                <tr>
+                  <th>Valores</th>
+                </tr>
+              </thead>
+              <tbody id='resultado'>
+
+              </tbody>
+            </table>
+        </div>
+
+        <script>
+            var app = angular.module('minhaApp', []);
+            app.controller('meuCtrl', function($scope) {
+                $scope.valores = [];
+                
+                $scope.adicionar = function() {
+                    $scope.valores.push($scope.valor);
+                    $scope.valor = "";
+                    
+                    if ($scope.valores.length == 3){
+                        document.getElementById('resultado').innerHTML = "";;
+                        switch($scope.n){
+                            case '1':
+                                $scope.crescente();
+                            break
+                            case '2':
+                                $scope.decrescente();
+                            break
+                            case '3':
+                                $scope.centralizado();
+                            break
+                        }
+                    }
+                }
+
+                $scope.crescente = function(){
+                    var aux;
+                    var troca = true;
+                    while (troca) {
+                        troca = false;
+                        for (var i = 0; i < 3; i++) {
+                            if ($scope.valores[i] > $scope.valores[i + 1]) {
+                                $scope.trocar(i)
+                                troca = true;
+                            }
+                        }
+                    }
+                    $scope.resultado();  
+                }
+
+                $scope.decrescente = function(){
+                    var aux;
+                    var troca = true;
+                    while (troca) {
+                        troca = false;
+                        for (var i = 0; i < 3; i++) {
+                            if ($scope.valores[i] < $scope.valores[i + 1]) {
+                                $scope.trocar(i)
+                                troca = true;
+                            }
+                        }
+                    }
+                    $scope.resultado();  
+                }
+
+                $scope.centralizado = function(){
+                    for (var i = 0; i < 2; i++) {
+                        if ($scope.valores[1] !== Math.max.apply(null , $scope.valores)){
+                            $scope.trocar(i)
+                        }
+                    }
+                    $scope.resultado();  
+                }
+
+                $scope.trocar = function (i){
+                    aux = $scope.valores[i];
+                    $scope.valores[i] = $scope.valores[i + 1];
+                    $scope.valores[i + 1] = aux;
+                }
+
+                $scope.resultado = function(){
+                    $scope.valores.forEach(valor => {
+                        var linha = document.createElement('tr');
+                        linha.insertCell(0).innerHTML = valor;
+                        document.getElementById('resultado').appendChild(linha);
+                    }); 
+                    $scope.valores = []
+                }
+            }); 
+        </script>
+    </body>
+</html>
+

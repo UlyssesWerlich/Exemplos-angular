@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <body>
+
+        <h3>
+            Peso
+        </h3>
+
+        <h4>
+            Algoritmo que calcula o peso ideal da pessoa, de acordo com a altura e o sexo.
+        </h4>
+
+        <div ng-app="minhaApp" ng-controller="meuCtrl" data-ng-init="altura=170">
+            <form class="form-inline" name="formItem">
+
+                <p>Altura (cm): </p> 
+                <input type="number" ng-model="altura">
+
+                <p>Calcular: 
+                    <button ng-click="resultadoMasculino()">Homem</button>
+                    <button ng-click="resultadoFeminino()">Mulher</button>
+                </p>
+            </form>
+
+            <p>Peso Ideal: <b> {{ pesoIdeal }} </b> Kg</p>
+        </div>
+
+        <script>
+            //Homens: (72.7 * h) – 58 Mulheres: (62.1 * h) - 44.7
+            var app = angular.module('minhaApp', []);
+            app.controller('meuCtrl', function($scope) {
+                $scope.pesoIdeal = 0;
+
+                $scope.resultadoMasculino = function(sexo) {
+                    $scope.pesoIdeal = ((72.7 * ($scope.altura / 100)) - 58).toFixed(2);
+                }
+
+                $scope.resultadoFeminino = function(sexo) {
+                    $scope.pesoIdeal = ((62.1 * ($scope.altura / 100)) - 44.7).toFixed(2);
+                }
+            }); 
+        </script>
+
+    </body>
+</html>
+
+
+

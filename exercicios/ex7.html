@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <body>
+
+        <h3>
+            Conversor de tempo
+        </h3>
+
+        <h4>
+            Algoritmo qu converte um intervalo de tempo dado em minutos, em horas, minutos e segundos.
+        </h4>
+
+        <div ng-app="minhaApp" ng-controller="meuCtrl" data-ng-init="hora=0;min=0;seg=0">
+            <form class="form-inline" name="formItem">
+                <input type="text" ng-model="tempo">
+                <button ng-click="calcular()">Calcular o tempo</button>
+            </form>
+
+            <p>Horário: <b> {{ hora }} </b> h <b> {{ min }} </b> m <b> {{ seg }} </b> s </p>
+        </div>
+
+        <script>
+            var app = angular.module('minhaApp', []);
+            app.controller('meuCtrl', function($scope) {
+                
+                $scope.calcular = function() {
+                    if (parseFloat($scope.tempo)){
+                        $scope.hora = Math.floor($scope.tempo / 60);
+
+                        var min = $scope.tempo % 60;
+                        $scope.min = Math.floor(min);
+
+                        var seg = min - Math.floor($scope.min);
+                        $scope.seg = (seg * 60).toFixed(1) ;
+                    } else {
+                        alert("Erro, valor digitado não é um número");
+                    }
+                }
+            }); 
+        </script>
+    </body>
+</html>

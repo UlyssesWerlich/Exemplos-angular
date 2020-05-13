@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <body>
+
+        <h3>
+            Verificador de valores
+        </h3>
+
+        <h4>
+            Algoritmo que le a coordenada espacial de dois pontos, e calcula a distância entre elas.
+        </h4>
+
+        <div ng-app="minhaApp" ng-controller="meuCtrl" data-ng-init="x1=1;y1=5;x2=1;y2=5">
+            <form class="form-inline" name="formItem">
+                <p>Ponto 1:</p> 
+                <span>X: </span><input type="number" ng-model="x1">
+                <span>Y: </span><input type="number" ng-model="y1">
+
+                <p>Ponto 2:</p> 
+                <span>X: </span><input type="number" ng-model="x2">
+                <span>Y: </span><input type="number" ng-model="y2">
+                <button ng-click="resultado()">Calcular</button>
+            </form>
+            <p>Distância: <b> {{ distancia }} </b></p>
+        </div>
+
+        <script>
+            var app = angular.module('minhaApp', []);
+            app.controller('meuCtrl', function($scope) {
+                $scope.distancia = 0;
+                
+                $scope.resultado = function() {
+                    $scope.distancia = Math.sqrt( Math.pow(( $scope.x1 - $scope.x2 ), 2) + Math.pow(( $scope.y1 - $scope.y2 ), 2));
+                }
+            }); 
+        </script>
+
+    </body>
+</html>

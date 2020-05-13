@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <body>
+
+        <h3>
+            Valor do combustível
+        </h3>
+
+        <h4>
+            Algoritmo que lê o número de litros vendido, o tipo de combustível e imprime o valor a ser pago pelo cliente.
+        </h4>
+
+        <div ng-app="minhaApp" ng-controller="meuCtrl" data-ng-init="litros=0">
+            <form class="form-inline" name="formItem">
+
+                <p>Litros: </p> 
+                <input type="number" ng-model="litros">
+
+                <p>Calcular: 
+                    <button ng-click="resultadoGasolina()">Gasolina</button>
+                    <button ng-click="resultadoAlcool()">Alcool</button>
+                </p>
+            </form>
+
+            <p>Valor total: R$<b> {{ valorTotal }} </b></p>
+        </div>
+
+        <script>
+            var app = angular.module('minhaApp', []);
+            app.controller('meuCtrl', function($scope) {
+                $scope.valorTotal = 0;
+
+                $scope.resultadoGasolina = function(sexo) {
+                    $scope.valorTotal = ( $scope.verificarDesconto(2.99, 0.04, 0.06) * $scope.litros ).toFixed(3);
+                }
+
+                $scope.resultadoAlcool = function(sexo) {
+                    $scope.valorTotal = ( $scope.verificarDesconto(2.19, 0.03, 0.05) * $scope.litros ).toFixed(3);
+                }
+
+                $scope.verificarDesconto = function(valorLitro, descontoMenor, descontoMaior){
+                    return ($scope.litros > 20)?(valorLitro * (1 - descontoMaior)):(valorLitro * ( 1 - descontoMenor));
+                }
+            }); 
+        </script>
+    </body>
+</html>

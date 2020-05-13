@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <body>
+
+        <h3>
+            Verificador de valores
+        </h3>
+
+        <h4>
+            Algoritmo para ler 50 números e ao final informar quantos números estão no intervalo entre 10 (inclusive) e 100 (inclusive).
+        </h4>
+
+        <div ng-app="minhaApp" ng-controller="meuCtrl">
+            <form class="form-inline" name="formItem">
+                <input type="number" ng-model="valor">
+                <button ng-click="adicionar()">Adicionar número ({{ valores.length }})</button>
+            </form>
+        </div>
+
+        <div ng-controller="meuCtrl">
+            <table>
+              <thead>
+                <tr>
+                  <th>Valores</th>
+                </tr>
+              </thead>
+              <tbody id='resultado'>
+
+              </tbody>
+            </table>
+        </div>
+
+        <script>
+            var app = angular.module('minhaApp', []);
+            app.controller('meuCtrl', function($scope) {
+                $scope.valores = [];
+                
+                $scope.adicionar = function() {
+                    $scope.valores.push($scope.valor);
+                    $scope.valor = "";
+
+                    if ($scope.valores.length == 50){
+                        $scope.verificar();
+                        $scope.valores = [];
+                    } 
+                    console.log($scope.valores);
+                }
+
+                $scope.verificar = function(){
+                    $scope.valores.forEach(valor => {
+                        if (valor >= 10 && valor <= 100){
+                            $scope.imprimir(valor)
+                        }
+                    });
+                }
+
+                $scope.imprimir = function(valor){
+                    var linha = document.createElement('tr');
+                    linha.insertCell(0).innerHTML = valor;
+                    document.getElementById('resultado').appendChild(linha);
+                }
+            }); 
+        </script>
+
+    </body>
+</html>

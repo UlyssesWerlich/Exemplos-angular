@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <body>
+
+        <h3>
+            Tabuada
+        </h3>
+
+        <h4>
+            Algoritmo qu converte um intervalo de tempo dado em minutos, em horas, minutos e segundos.
+        </h4>
+
+        <div ng-app="" data-ng-init="numero=1">
+            <form class="form-inline" name="formItem">
+                <input type="number" ng-model="numero">
+            </form>
+
+            <p>{{ numero }} x 1 = <b> {{ numero * 1 }} </b></p>
+            <p>{{ numero }} x 2 = <b> {{ numero * 2 }} </b></p>
+            <p>{{ numero }} x 3 = <b> {{ numero * 3 }} </b></p>
+            <p>{{ numero }} x 4 = <b> {{ numero * 4 }} </b></p>
+            <p>{{ numero }} x 5 = <b> {{ numero * 5 }} </b></p>
+            <p>{{ numero }} x 6 = <b> {{ numero * 6 }} </b></p>
+            <p>{{ numero }} x 7 = <b> {{ numero * 7 }} </b></p>
+            <p>{{ numero }} x 8 = <b> {{ numero * 8 }} </b></p>
+            <p>{{ numero }} x 9 = <b> {{ numero * 9 }} </b></p>
+            <p>{{ numero }} x 10 = <b> {{ numero * 10 }} </b></p>
+        </div>
+    </body>
+</html>
